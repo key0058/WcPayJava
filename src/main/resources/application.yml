@@ -1,3 +1,19 @@
+spring:
+  profiles:
+    active: dev
+  
+## Local Enviroment ##########
+---  
+spring:
+  profiles: dev
+server:
+  port: 8080
+  host: localhost
+
+## SSL Enviroment ##########
+---
+spring:
+  profiles: prd
 server:
   port: 443
   host: www.jchen.club

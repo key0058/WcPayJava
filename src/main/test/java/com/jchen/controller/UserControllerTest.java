@@ -10,18 +10,30 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import com.jchen.bean.User;
+import com.jchen.dao.UserDao;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class HelloControllerTest {
+public class UserControllerTest {
 	
 	@Autowired
 	private MockMvc mvc;
 	
-	@Test
+//	@Test
 	public void testHello() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/hello"))
 			.andExpect(MockMvcResultMatchers.status().isOk());
+	}
+	
+	@Autowired
+	private UserDao userDao;
+	
+	@Test
+	public void testFindUser() throws Exception {
+		User user = userDao.findUser("benchan", "1234x");
+		System.out.println(user.getObjectId() + "=" + user.getUsername() + "=" + user.getPassword());
 	}
 
 }

@@ -21,14 +21,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.ericsoft.bmob</groupId>
-			<artifactId>bmob-java-sdk</artifactId>
-			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/lib/bmob-java-sdk.jar</systemPath>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
@@ -42,18 +35,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<webResources>
-						<resource>
-	                        <directory>${project.basedir}/src/lib</directory>
-	                        <targetPath>BOOT-INF/lib</targetPath>
-	                        <filtering>true</filtering>
-	                        <includes>
-	                            <include>**/*.jar</include>
-	                        </includes>
-	                    </resource>
-					</webResources>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

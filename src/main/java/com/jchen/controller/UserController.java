@@ -2,6 +2,7 @@ package com.jchen.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jchen.bean.User;
@@ -14,7 +15,7 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping("/user/login")
-	public User login(String username, String password) {
+	public User login(@RequestParam String username, @RequestParam String password) {
 		return userService.findUser(username, password);
 	}
 

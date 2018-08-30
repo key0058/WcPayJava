@@ -5,6 +5,7 @@ public class User {
 	private String objectId;
 	private String username;
 	private String password;
+	private String role;
 	
 	public String getObjectId() {
 		return objectId;
@@ -23,6 +24,12 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public String getRole() {
+		return role;
 	}
 
 

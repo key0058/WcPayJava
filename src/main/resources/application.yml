@@ -1,10 +1,15 @@
 spring:
   profiles:
     active: dev
+  datasource:
+    url:  jdbc:sqlite:account.db
+    driver-class-name: org.sqlite.JDBC  
+   
     
 bmob:
   app-id: 37b79d1b03807693a777002779739d61
   rest-api-key: 3a4e7412d1d8822f077cd78c2449147a
+  
   
 ## Local Enviroment ##########
 ---  

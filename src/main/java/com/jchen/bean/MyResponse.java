@@ -2,14 +2,14 @@ package com.jchen.bean;
 
 public class MyResponse {
 	
-	private String code;
+	private int code;
 	private String message;
 	private Object data;
 	
-	public String getCode() {
+	public int getCode() {
 		return code;
 	}
-	public void setCode(String code) {
+	public void setCode(int code) {
 		this.code = code;
 	}
 	public String getMessage() {

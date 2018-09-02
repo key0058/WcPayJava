@@ -18,6 +18,12 @@ spring:
 server:
   port: 8080
   host: localhost
+  
+logging:
+  file: log.txt
+  level:
+    root: INFO
+    
 
 ## SSL Enviroment ##########
 ---

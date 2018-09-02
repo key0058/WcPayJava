@@ -29,16 +29,13 @@ public class UserDaoImpl implements UserDao {
 		where.put("password", equalPwd);
 		
 		String result = Bmob.find("Account", where.toString(), "username");
-		System.out.println("====2=" + result);
-		
+		System.out.println("++++" + result);
 		BSONObject object = new BSONObject(result);
 		Object[] objArray = (Object[])object.get("results");
-		User user = JSON.parseObject(String.valueOf(objArray[0]), new TypeReference<User>() {});
-//		object = new BSONObject(String.valueOf(objArray[0]));
-//		User user = new User();
-//		user.setObjectId(object.getString("objectId"));
-//		user.setUsername(object.getString("username"));
-//		user.setPassword(object.getString("password"));
+		User user = null;
+		if (objArray.length > 0) {
+			user = JSON.parseObject(String.valueOf(objArray[0]), new TypeReference<User>() {});
+		}
 		return user;
 	}
 

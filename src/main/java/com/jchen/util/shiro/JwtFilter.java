@@ -41,7 +41,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
 	}
 	
 	/**
-     * 如果请求头带有 Authorization，则对 token 进行检查，否则直接通过
+     * 如果请求头带有 Authorization，则对 token 进行检查，否则直接通过。 
      * 如果请求头不存在 Authorization，则可能是执行登陆操作或者是游客状态访问，无需检查 token，直接返回 true
      */
 	@Override

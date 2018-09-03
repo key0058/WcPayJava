@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 public class JwtFilter extends BasicHttpAuthenticationFilter {
 	
@@ -61,6 +63,11 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
 		res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,PUT,DELETE");
 		res.setHeader("Access-Control-Allow-Headers", req.getHeader("Access-Control-Request-Headers"));
 
+		// 跨域时会首先发送一个option请求，这里我们给option请求直接返回正常状态
+        if (req.getMethod().equals(RequestMethod.OPTIONS.name())) {
+            res.setStatus(HttpStatus.OK.value());
+            return false;
+        }
 
 		return super.preHandle(request, response);
 	}

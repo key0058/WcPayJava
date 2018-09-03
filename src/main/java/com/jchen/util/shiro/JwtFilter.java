@@ -1,5 +1,8 @@
 package com.jchen.util.shiro;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +22,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
 	protected boolean isLoginAttempt(ServletRequest request, ServletResponse response) {
 		HttpServletRequest req = (HttpServletRequest) request;
 		String authorization = req.getHeader("Authorization");
+		System.out.println("++++ user is login now!");
 		return authorization != null;
 	}
 	
@@ -32,6 +36,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
 		String authorization = req.getHeader("Authorization");
 		JwtToken token = new JwtToken(authorization);
 		getSubject(request, response).login(token);
+		System.out.println("++++ user check token:" + token);
 		return true;
 	}
 	
@@ -44,11 +49,13 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
 		if (isLoginAttempt(request, response)) {
 			try {
 				executeLogin(request, response);
+				System.out.println("++++ user check access");				
 			} catch (Exception e) {
 				e.printStackTrace();
 				return false;
 			}
 		}
+		System.out.println("++++ user no token!");
 		return true;
 	}
 	

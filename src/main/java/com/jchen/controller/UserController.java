@@ -2,6 +2,7 @@ package com.jchen.controller;
 
 import java.util.List;
 
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,11 +44,13 @@ public class UserController {
 		}
 	}
 	
+	@RequiresAuthentication
 	@RequestMapping("/user/save")
 	public int signUp(User user) {
 		return userService.saveUser(user);
 	}
 	
+	@RequiresAuthentication
 	@RequestMapping("/user/all")
 	public List<User> findUsers() {
 		return userService.findAllUsers();

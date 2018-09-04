@@ -53,8 +53,9 @@ public class ShiroConfig {
 		filterMap.put("jwt", new JwtFilter());
 		
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("/user/login", "anon");
-		map.put("/user/**", "jwt");
+//		map.put("/401", "anon");
+//		map.put("/user/login", "anon");
+//		map.put("/user/**", "jwt");
 		map.put("/**", "jwt");		
 		
 		shiroFilterFactoryBean.setSecurityManager(securityManager);

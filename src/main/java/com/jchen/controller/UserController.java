@@ -55,5 +55,13 @@ public class UserController {
 	public List<User> findUsers() {
 		return userService.findAllUsers();
 	}
+	
+	@RequestMapping("/401")
+	public MyResponse unauthorized() {
+		MyResponse res = new MyResponse();
+		res.setCode(MyResponseUtil.CODE_FAIL);
+		res.setMessage(MyResponseUtil.MSG_FAIL_AUTH);
+		return res;
+	}
 
 }

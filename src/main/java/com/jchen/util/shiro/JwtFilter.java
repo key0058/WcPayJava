@@ -1,7 +1,7 @@
 package com.jchen.util.shiro;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -41,8 +41,8 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
 	}
 	
 	/**
-     * 如果请求头带有 Authorization，则对 token 进行检查，否则直接通过。 
-     * 如果请求头不存在 Authorization，则可能是执行登陆操作或者是游客状态访问，无需检查 token，直接返回 true
+	 *  如果请求头带有 Authorization，则对 token 进行检查，否则直接通过。
+	 *  如果请求头不存在 Authorization，则可能是执行登陆操作或者是游客状态访问，无需检查 token，直接返回 true
      */
 	@Override
 	protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
@@ -55,12 +55,19 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
 				return false;
 			}
 		}
-		System.out.println("++++ user no token!");
-		return true;
+		
+		List<String> anonUrls = new ArrayList<String>();
+		anonUrls.add("/user/login");
+		anonUrls.add("/401");
+		
+		HttpServletRequest req = (HttpServletRequest) request;
+		if (anonUrls.contains(req.getRequestURI()))
+			return true;
+		return false;
 	}
 	
 	/**
-     * 对跨域提供支持
+	 * * 对跨域提供支持
      */
 	@Override
 	protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
@@ -78,5 +85,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
 
 		return super.preHandle(request, response);
 	}
+	
+	
 
 }

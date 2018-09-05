@@ -1,11 +1,15 @@
 package com.jchen.bean;
 
+import java.util.List;
+
 public class User {
 	
 	private String objectId;
 	private String username;
 	private String password;
-	private String role;
+
+	private List<Role> roles;
+	private List<Permission> permissions;
 	
 	public String getObjectId() {
 		return objectId;
@@ -25,14 +29,17 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public void setRole(String role) {
-		this.role = role;
+	public List<Role> getRoles() {
+		return roles;
 	}
-	public String getRole() {
-		return role;
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
-
-
-	
+	public List<Permission> getPermissions() {
+		return permissions;
+	}
+	public void setPermissions(List<Permission> permissions) {
+		this.permissions = permissions;
+	}
 	
 }

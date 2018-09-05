@@ -1,0 +1,23 @@
+package com.jchen.dao;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class UserDaoTest {
+	
+	@Autowired
+	private UserDao userDao;
+	
+	
+	@Test
+	public void testFunction() {
+//		userDao.findUser("\"benchan\"", "\"1234x\"");
+		System.out.println(userDao.findUserRoles("\"JoF4NNNl\""));
+	}
+
+}

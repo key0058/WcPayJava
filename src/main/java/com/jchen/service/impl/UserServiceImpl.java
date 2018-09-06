@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jchen.bean.User;
-import com.jchen.dao.UserDao;
+import com.jchen.dao.UserBmobDao;
 import com.jchen.mapper.UserMapper;
 import com.jchen.service.UserService;
 
@@ -14,7 +14,7 @@ import com.jchen.service.UserService;
 public class UserServiceImpl implements UserService {
 	
 	@Autowired
-	private UserDao userDao;
+	private UserBmobDao userDao;
 	
 	@Autowired
 	private UserMapper userMapper;

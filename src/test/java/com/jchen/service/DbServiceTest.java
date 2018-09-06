@@ -1,4 +1,4 @@
-package com.jchen.dao;
+package com.jchen.service;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,19 +8,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserDaoTest {
+public class DbServiceTest {
 	
 	@Autowired
-	private UserBmobDao userDao;
-	
+	private DbService dbService;
 	
 	@Test
 	public void testFunction() {
-//		userDao.findUser("\"benchan\"", "\"1234x\"");
-//		userDao.findRoles();
-//		userDao.findPermissions();
-		userDao.findUserRoles();
-		userDao.findRolePermissions();
+		dbService.initDB();
 	}
 
 }

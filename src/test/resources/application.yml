@@ -3,8 +3,6 @@ spring:
     active: dev
   datasource:
     url:  jdbc:sqlite:account.db
-    username:
-    password:
     driver-class-name: org.sqlite.JDBC  
    
     
@@ -20,6 +18,12 @@ spring:
 server:
   port: 8080
   host: localhost
+  
+logging:
+  file: log.txt
+  level:
+    root: INFO
+    
 
 ## SSL Enviroment ##########
 ---

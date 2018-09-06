@@ -12,11 +12,11 @@ import com.jchen.bean.User;
 @Mapper
 public interface UserMapper {
 	
-//	@Select("CREATE TABLE user(id INTEGER PRIMARY KEY, username varchar(32), password varchar(128), role varchar(20), permission varchar(128))")
-//	public void createUserTable();
+	@Select("CREATE TABLE user(id INTEGER PRIMARY KEY, userId varchar(128), username varchar(128), password varchar(128))")
+	public void createUser();
 
 	@Options(useGeneratedKeys=true,keyProperty="id")
-	@Insert("INSERT INTO user(username, password, role) VALUES (#{username}, #{password}, #{role})")
+	@Insert("INSERT INTO user(userId, username, password) VALUES (#{objectId}, #{username}, #{password})")
 	public int insertUser(User user);
 	
 	@Select("SELECT * FROM user")

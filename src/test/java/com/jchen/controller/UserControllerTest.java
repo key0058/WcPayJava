@@ -11,7 +11,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.jchen.bean.User;
-import com.jchen.dao.UserDao;
+import com.jchen.dao.UserBmobDao;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -28,7 +28,7 @@ public class UserControllerTest {
 	}
 	
 	@Autowired
-	private UserDao userDao;
+	private UserBmobDao userDao;
 	
 	@Test
 	public void testFindUser() throws Exception {

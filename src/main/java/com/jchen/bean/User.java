@@ -4,6 +4,7 @@ import java.util.List;
 
 public class User {
 	
+	private String userId;
 	private String objectId;
 	private String username;
 	private String password;
@@ -11,6 +12,13 @@ public class User {
 	private List<Role> roles;
 	private List<Permission> permissions;
 	
+	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	public String getObjectId() {
 		return objectId;
 	}

@@ -38,8 +38,9 @@ public class UserBmobDaoImpl implements UserBmobDao {
 		BSONObject object = new BSONObject(result);
 		Object[] objArray = (Object[]) object.get("results");
 		if (objArray.length > 0) {
-			return JSON.parseObject(String.valueOf(objArray[0]), new TypeReference<User>() {});
-			
+			User user = JSON.parseObject(String.valueOf(objArray[0]), new TypeReference<User>() {});
+			user.setUserId(user.getObjectId());
+			return user;
 		}
 		return null;
 	}
@@ -125,6 +126,4 @@ public class UserBmobDaoImpl implements UserBmobDao {
 		}
 		return map;
 	}
-	
-
 }

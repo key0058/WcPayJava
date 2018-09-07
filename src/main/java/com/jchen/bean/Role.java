@@ -2,10 +2,17 @@ package com.jchen.bean;
 
 public class Role {
 	
+	private String roleId;
 	private String objectId;
 	private String name;
 	
 	
+	public String getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
+	}
 	public String getObjectId() {
 		return objectId;
 	}

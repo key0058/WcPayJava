@@ -8,10 +8,15 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.jchen.service.UserService;
 import com.jchen.util.jwt.JwtUtil;
 
 public class MyRealm extends AuthorizingRealm {
+	
+	@Autowired
+	private UserService userService;
 	
 	@Override
 	public boolean supports(AuthenticationToken token) {

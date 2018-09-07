@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public User findUser(String username, String password) {
+	public User findBmobUser(String username, String password) {
 		return userDao.findUser(username, password);
 	}
 }

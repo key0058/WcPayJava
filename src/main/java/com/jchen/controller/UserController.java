@@ -27,11 +27,12 @@ public class UserController {
 		MyResponse res = new MyResponse();
 		try {
 			System.out.println(user.getUsername() + "==" + user.getPassword());
-			user = userService.findUser(user.getUsername(), user.getPassword());
+			user = userService.findBmobUser(user.getUsername(), user.getPassword());
 			if (user != null) {
 				res.setCode(MyResponseUtil.CODE_SUCCESS);
 				res.setMessage(MyResponseUtil.MSG_SUCCESS);
 				res.setData(JwtUtil.sign(user.getUsername()));
+				userService.saveUser(user);
 			} else {
 				res.setCode(MyResponseUtil.CODE_FAIL);
 				res.setMessage(MyResponseUtil.MSG_FAIL_AUTH);

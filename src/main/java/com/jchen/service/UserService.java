@@ -10,7 +10,7 @@ public interface UserService {
 	
 	public List<User> findAllUsers();
 	
-	public User findUser(String username, String password);
+	public User findBmobUser(String username, String password);
 	
 	
 	

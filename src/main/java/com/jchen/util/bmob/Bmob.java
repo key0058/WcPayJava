@@ -391,6 +391,19 @@ public class Bmob {
 		}
 		return result;
 	}
+	
+	/**
+	 * BQL查询表记录
+	 * @param BQL SQL语句。例如：select * from Student where name=? limit ?,? order by name
+	 * @param value 参数对应SQL中?，只包含一个参数，类型为String，并将字符修改为带有冒号格式
+	 * @return JSON格式结果
+	 */
+	public static String findBQL(String BQL, String value, boolean isSingleParam) {
+		if (isSingleParam) {
+			return findBQL(BQL, "\"" + value + "\"");
+		}
+		return findBQL(BQL, value);
+	}
 
 
 	/**

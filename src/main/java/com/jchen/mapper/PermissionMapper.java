@@ -25,9 +25,14 @@ public interface PermissionMapper {
 	@Insert("INSERT INTO role_permission(roleId, permissionId) VALUES (#{roleId}, #{permissionId})")
 	public int insertRolePermission(String roleId, String permissionId);
 	
+//	@Select("SELECT * FROM permission WHERE permissionId = #{permissionId}")
+//	public Permission selectPermission(String permissionId);
 	
 	@Delete("DELETE FROM permission;")
 	public void deleteAllPermissions();
+	
+//	@Delete("DELETE FROM role_permission WHERE roleId = #{roleId}")
+//	public void deleteRolePermissions(String roleId);
 	
 	@Delete("DELETE FROM role_permission;")
 	public void deleteAllRolePermissions();

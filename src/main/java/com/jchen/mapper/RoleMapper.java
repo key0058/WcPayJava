@@ -1,5 +1,7 @@
 package com.jchen.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -25,8 +27,17 @@ public interface RoleMapper {
 	@Insert("INSERT INTO user_role(userId, roleId) VALUES (#{userId}, #{roleId})")
 	public int insertUserRole(String userId, String roleId);
 	
+	@Select("SELECT * FROM role WHERE roleId = #{roleId}")
+	public Role selectRole(String roleId);
+	
+	@Select("SELECT * FROM user_role WHERE userId = #{userId}")
+	public List<Role> selectUserRoles(String userId);
+	
 	@Delete("DELETE FROM role;")
 	public void deleteAllRoles();
+	
+	@Delete("DELETE FROM user_role WHERE userId = #{userId}")
+	public void deleteUserRoles(String userId);
 	
 	@Delete("DELETE FROM user_role;")
 	public void deleteAllUserRoles();

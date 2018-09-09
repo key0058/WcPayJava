@@ -16,11 +16,11 @@ public class UserDaoTest {
 	
 	@Test
 	public void testFunction() {
-//		userDao.findUser("\"benchan\"", "\"1234x\"");
+		userDao.findUser("benchan");
 //		userDao.findRoles();
 //		userDao.findPermissions();
-		userDao.findUserRoles();
-		userDao.findRolePermissions();
+//		userDao.findUserRoles();
+//		userDao.findRolePermissions();
 	}
 
 }

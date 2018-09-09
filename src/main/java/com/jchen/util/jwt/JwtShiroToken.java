@@ -1,12 +1,12 @@
-package com.jchen.util.shiro;
+package com.jchen.util.jwt;
 
 import org.apache.shiro.authc.AuthenticationToken;
 
-public class JwtToken implements AuthenticationToken {
+public class JwtShiroToken implements AuthenticationToken {
 	
 	private String token;
 	
-	public JwtToken(String token) {
+	public JwtShiroToken(String token) {
 		this.token = token;
 	}
 	

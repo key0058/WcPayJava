@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.jchen.bean.User;
 import com.jchen.dao.UserBmobDao;
+import com.jchen.mapper.RoleMapper;
 import com.jchen.mapper.UserMapper;
 import com.jchen.service.UserService;
 
@@ -18,10 +19,28 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserMapper userMapper;
+	@Autowired
+	private RoleMapper roleMapper;
 	
 	@Override
-	public int saveUser(User user) {
-		return userMapper.insertUser(user);
+	public void saveUser(User user) {
+		if (user != null) {
+			this.cleanUser(user);
+			userMapper.insertUser(user);
+			List<String> userRoles = userDao.findUserRoles(user.getUserId());
+			for (String key : userRoles) {
+				String[] values = key.split(",");
+				roleMapper.insertUserRole(values[0], values[1]);
+			}
+		}
+	}
+	
+	@Override
+	public void cleanUser(User user) {
+		if (user != null) {
+			userMapper.deleteUser(user.getUserId());
+			roleMapper.deleteUserRoles(user.getUserId());
+		}
 	}
 	
 	@Override
@@ -30,7 +49,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public User findBmobUser(String username, String password) {
-		return userDao.findUser(username, password);
+	public User findBmobUser(String username) {
+		return userDao.findUser(username);
 	}
 }

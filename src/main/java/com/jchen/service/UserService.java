@@ -6,11 +6,13 @@ import com.jchen.bean.User;
 
 public interface UserService {
 	
-	public int saveUser(User user);
+	public void cleanUser(User user);
+	
+	public void saveUser(User user);
 	
 	public List<User> findAllUsers();
 	
-	public User findBmobUser(String username, String password);
+	public User findBmobUser(String username);
 	
 	
 	

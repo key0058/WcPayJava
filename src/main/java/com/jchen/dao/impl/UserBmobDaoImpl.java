@@ -1,7 +1,6 @@
 package com.jchen.dao.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,11 +26,10 @@ public class UserBmobDaoImpl implements UserBmobDao {
 	private String BMOB_REST_API_KEY;
 	
 	@Override
-	public User findUser(String username, String password) {
+	public User findUser(String username) {
 		Bmob.initBmob(BMOB_APP_ID, BMOB_REST_API_KEY);
-		String bql = "Select * from Account where username = ? and password = ?";
-		String value = username + "," + password;
-		String result = Bmob.findBQL(bql, value);
+		String bql = "Select * FROM Account WHERE username = ?";
+		String result = Bmob.findBQL(bql, username, true);
 		
 		System.out.println("++++ BMOB RESULT: " + result);
 		
@@ -49,7 +47,7 @@ public class UserBmobDaoImpl implements UserBmobDao {
 	public List<Role> findRoles() {
 		List<Role> list = null;
 		Bmob.initBmob(BMOB_APP_ID, BMOB_REST_API_KEY);
-		String bql = "SELECT * from Role";
+		String bql = "SELECT * FROM Role";
 		String result = Bmob.findBQL(bql);
 		
 		System.out.println("++++ BMOB RESULT: " + result);
@@ -69,7 +67,7 @@ public class UserBmobDaoImpl implements UserBmobDao {
 	public List<Permission> findPermissions() {
 		List<Permission> list = null;
 		Bmob.initBmob(BMOB_APP_ID, BMOB_REST_API_KEY);
-		String bql = "SELECT * from Permission";
+		String bql = "SELECT * FROM Permission";
 		String result = Bmob.findBQL(bql);
 		
 		System.out.println("++++ BMOB RESULT: " + result);
@@ -86,31 +84,31 @@ public class UserBmobDaoImpl implements UserBmobDao {
 	}
 	
 	@Override
-	public Map<String, String> findUserRoles() {
-		Map<String, String> map = null;
+	public List<String> findUserRoles(String userId) {
+		List<String> list = null;
 		Bmob.initBmob(BMOB_APP_ID, BMOB_REST_API_KEY);
-		String bql = "SELECT * from AccountRole";
-		String result = Bmob.findBQL(bql);
+		String bql = "SELECT * FROM AccountRole WHERE userId = ?";
+		String result = Bmob.findBQL(bql, userId, true);
 		
 		System.out.println("++++ BMOB RESULT: " + result);
 		
 		BSONObject object = new BSONObject(result);
 		Object[] objArray = (Object[])object.get("results");
 		if (objArray.length > 0) {
-			map = new HashMap<String, String>();
+			list = new ArrayList<String>();
 			for(int idx = 0; idx < objArray.length; idx++) {
 				Map<String, String> values = JSON.parseObject(String.valueOf(objArray[idx]), new TypeReference<Map<String, String>>() {});
-				map.put(values.get("accountId"), values.get("roleId"));
+				list.add(values.get("accountId") + "," + values.get("roleId"));
 			}
 		}
-		return map;
+		return list;
 	}
 	
 	@Override
-	public Map<String, String> findRolePermissions() {
-		Map<String, String> map = null;
+	public List<String> findRolePermissions() {
+		List<String> list = null;
 		Bmob.initBmob(BMOB_APP_ID, BMOB_REST_API_KEY);
-		String bql = "SELECT * from RolePermission";
+		String bql = "SELECT * FROM RolePermission";
 		String result = Bmob.findBQL(bql);
 		
 		System.out.println("++++ BMOB RESULT: " + result);
@@ -118,12 +116,12 @@ public class UserBmobDaoImpl implements UserBmobDao {
 		BSONObject object = new BSONObject(result);
 		Object[] objArray = (Object[])object.get("results");
 		if (objArray.length > 0) {
-			map = new HashMap<String, String>();
+			list = new ArrayList<String>();
 			for(int idx = 0; idx < objArray.length; idx++) {
 				Map<String, String> values = JSON.parseObject(String.valueOf(objArray[idx]), new TypeReference<Map<String, String>>() {});
-				map.put(values.get("roleId"), values.get("permissionId"));
+				list.add(values.get("roleId") + "," + values.get("permissionId"));
 			}
 		}
-		return map;
+		return list;
 	}
 }

@@ -51,14 +51,10 @@ public class DbServiceImpl implements DbService {
 			permissionMapper.insertPermission(permission);
 		}
 		
-		Map<String, String> userRoles = userDao.findUserRoles();
-		for (String key : userRoles.keySet()) {
-			roleMapper.insertUserRole(key, userRoles.get(key));
-		}
-		
-		Map<String, String> rolePermissions = userDao.findRolePermissions();
-		for (String key : rolePermissions.keySet()) {
-			permissionMapper.insertRolePermission(key, userRoles.get(key));
+		List<String> rolePermissions = userDao.findRolePermissions();
+		for (String key : rolePermissions) {
+			String[] values = key.split(",");
+			permissionMapper.insertRolePermission(values[0], values[1]);
 		}
 		
 	}

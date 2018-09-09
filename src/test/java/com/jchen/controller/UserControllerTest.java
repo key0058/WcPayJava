@@ -32,7 +32,7 @@ public class UserControllerTest {
 	
 	@Test
 	public void testFindUser() throws Exception {
-		User user = userDao.findUser("benchan", "1234x");
+		User user = userDao.findUser("benchan");
 		System.out.println(user.getObjectId() + "=" + user.getUsername() + "=" + user.getPassword());
 	}
 

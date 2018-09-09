@@ -20,8 +20,14 @@ public interface UserMapper {
 	@Insert("INSERT INTO user(userId, username, password) VALUES (#{objectId}, #{username}, #{password})")
 	public int insertUser(User user);
 	
+	@Select("SELECT * FROM user WHERE username = #{username}")
+	public User selectUser(String username);
+
 	@Select("SELECT * FROM user")
 	public List<User> findAllUsers();
+	
+	@Delete("DELETE FROM user WHERE userId = #{userId}")
+	public void deleteUser(String userId);
 	
 	@Delete("DELETE FROM user")
 	public void deleteAllUsers();

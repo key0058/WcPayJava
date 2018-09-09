@@ -1,4 +1,4 @@
-package com.jchen.util.shiro;
+package com.jchen.util.jwt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-public class JwtFilter extends BasicHttpAuthenticationFilter {
+public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
 	
 	/**
 	     * 判断用户是否想要登入。
@@ -34,7 +34,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
 	protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
 		HttpServletRequest req = (HttpServletRequest) request;
 		String authorization = req.getHeader("Authorization");
-		JwtToken token = new JwtToken(authorization);
+		JwtShiroToken token = new JwtShiroToken(authorization);
 		getSubject(request, response).login(token);
 		System.out.println("++++ user check token:" + token);
 		return true;

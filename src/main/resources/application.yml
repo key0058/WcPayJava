@@ -3,8 +3,14 @@ spring:
     active: dev
   datasource:
     url:  jdbc:sqlite:account.db
-    driver-class-name: org.sqlite.JDBC  
-   
+    driver-class-name: org.sqlite.JDBC
+  thymeleaf:
+    content-type: text/html
+    enabled: true
+    encoding: utf-8
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
     
 bmob:
   app-id: 37b79d1b03807693a777002779739d61
@@ -15,6 +21,9 @@ bmob:
 ---  
 spring:
   profiles: dev
+  thymeleaf:
+    cache: true
+  
 server:
   port: 8080
   host: localhost
@@ -29,6 +38,9 @@ logging:
 ---
 spring:
   profiles: prd
+  thymeleaf:
+    cache: false
+  
 server:
   port: 443
   host: www.jchen.club

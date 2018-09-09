@@ -18,21 +18,25 @@ import com.jchen.util.jwt.JwtUtil;
 @RestController
 public class UserController {
 	
-	
 	@Autowired
 	private UserService userService;
+	
+	@RequestMapping("/hello")
+	public String hello() {
+		return "index";
+	}
 	
 	@PostMapping("/user/login")
 	public MyResponse login(@RequestBody User user) {
 		MyResponse res = new MyResponse();
 		try {
 			System.out.println(user.getUsername() + "==" + user.getPassword());
-			user = userService.findBmobUser(user.getUsername(), user.getPassword());
-			if (user != null) {
+			User bmobUser = userService.findBmobUser(user.getUsername());
+			if (bmobUser != null && bmobUser.getPassword().equals(user.getPassword())) {
 				res.setCode(MyResponseUtil.CODE_SUCCESS);
 				res.setMessage(MyResponseUtil.MSG_SUCCESS);
 				res.setData(JwtUtil.sign(user.getUsername()));
-				userService.saveUser(user);
+				userService.saveUser(bmobUser);
 			} else {
 				res.setCode(MyResponseUtil.CODE_FAIL);
 				res.setMessage(MyResponseUtil.MSG_FAIL_AUTH);
@@ -47,22 +51,14 @@ public class UserController {
 	
 	@RequiresAuthentication
 	@RequestMapping("/user/save")
-	public int signUp(User user) {
-		return userService.saveUser(user);
+	public void signUp(User user) {
+		userService.saveUser(user);
 	}
 	
 	@RequiresAuthentication
 	@RequestMapping("/user/all")
 	public List<User> findUsers() {
 		return userService.findAllUsers();
-	}
-	
-	@RequestMapping("/401")
-	public MyResponse unauthorized() {
-		MyResponse res = new MyResponse();
-		res.setCode(MyResponseUtil.CODE_FAIL);
-		res.setMessage(MyResponseUtil.MSG_FAIL_AUTH);
-		return res;
 	}
 
 }

@@ -11,16 +11,17 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jchen.service.UserService;
+import com.jchen.util.jwt.JwtShiroToken;
 import com.jchen.util.jwt.JwtUtil;
 
-public class MyRealm extends AuthorizingRealm {
+public class ShiroRealm extends AuthorizingRealm {
 	
 	@Autowired
 	private UserService userService;
 	
 	@Override
 	public boolean supports(AuthenticationToken token) {
-		return token instanceof JwtToken;
+		return token instanceof JwtShiroToken;
 	}
 
 	/**
@@ -42,10 +43,10 @@ public class MyRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		String jwtToken = (String) token.getCredentials();
+		System.out.println("+++++Check token:" + jwtToken);
 		if (!JwtUtil.verify(jwtToken)) {
 			throw new AuthenticationException("++++ Jwt Token fail!");
 		}
-		System.out.println("+++++Check token:" + jwtToken);
 		return new SimpleAuthenticationInfo(jwtToken, jwtToken, "MY_REALM");
 	}
 

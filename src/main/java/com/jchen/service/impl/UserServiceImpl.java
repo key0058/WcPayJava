@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.jchen.bean.User;
 import com.jchen.dao.UserBmobDao;
@@ -21,6 +22,23 @@ public class UserServiceImpl implements UserService {
 	private UserMapper userMapper;
 	@Autowired
 	private RoleMapper roleMapper;
+	
+	@Override
+	public boolean loginUser(User user) {
+		if (user == null) 
+			return false;
+		if (StringUtils.isEmpty(user.getUsername()) || StringUtils.isEmpty(user.getPassword()))
+			return false;
+		
+		User bmobUser = findBmobUser(user.getUsername());
+		if (bmobUser.getPassword().equals(user.getPassword())) {
+			System.out.println("+++++ Service login success:" + user.getUsername() + "=" + user.getPassword());
+			cleanUser(bmobUser);
+			saveUser(bmobUser);
+			return true;
+		}
+		return false;
+	}
 	
 	@Override
 	public void saveUser(User user) {

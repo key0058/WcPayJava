@@ -55,19 +55,21 @@ public class ShiroConfig {
 		// 添加自己的过滤器并且取名为jwt
 		Map<String, Filter> filterMap = new HashMap<String, Filter>();
 		filterMap.put("jwt", new JwtShiroFilter());
-		filterMap.put("user", new UserShiroFilter());
+//		filterMap.put("user", new UserShiroFilter());
 		
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("/index", "anon");
+		map.put("/login", "anon");
+		map.put("/logout", "logout"); 	
 //		map.put("/user/login", "anon");
 //		map.put("/user/**", "jwt");
+		map.put("/401", "anon");
 		map.put("/jwt/**", "jwt");	
 		map.put("/**", "authc");
 		
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
 		shiroFilterFactoryBean.setLoginUrl("/index");
 		shiroFilterFactoryBean.setSuccessUrl("/menu");
-		shiroFilterFactoryBean.setUnauthorizedUrl("/index");
+		shiroFilterFactoryBean.setUnauthorizedUrl("/401");
 		shiroFilterFactoryBean.setFilters(filterMap);
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
 		return shiroFilterFactoryBean;

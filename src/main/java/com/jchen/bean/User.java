@@ -12,6 +12,14 @@ public class User {
 	private List<Role> roles;
 	private List<Permission> permissions;
 	
+	public User() {
+		super();
+	}
+
+	public User(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
 	
 	public String getUserId() {
 		return userId;

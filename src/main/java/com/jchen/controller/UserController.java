@@ -1,64 +1,49 @@
 package com.jchen.controller;
 
-import java.util.List;
-
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.jchen.bean.MyResponse;
 import com.jchen.bean.User;
-import com.jchen.service.UserService;
-import com.jchen.util.MyResponseUtil;
-import com.jchen.util.jwt.JwtUtil;
 
-@RestController
+@Controller
 public class UserController {
 	
-	@Autowired
-	private UserService userService;
-	
-	@RequestMapping("/hello")
-	public String hello() {
+	@RequestMapping("/index")
+	public String index() {
 		return "index";
 	}
 	
-	@PostMapping("/user/login")
-	public MyResponse login(@RequestBody User user) {
-		MyResponse res = new MyResponse();
+	@RequestMapping("/menu")
+	public String menu() {
+		return "menu";
+	}
+	
+	@PostMapping("/login")
+	public String login(Model model, User user) {
+		UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
 		try {
-			System.out.println(user.getUsername() + "==" + user.getPassword());
-			User bmobUser = userService.findBmobUser(user.getUsername());
-			if (bmobUser != null && bmobUser.getPassword().equals(user.getPassword())) {
-				res.setCode(MyResponseUtil.CODE_SUCCESS);
-				res.setMessage(MyResponseUtil.MSG_SUCCESS);
-				res.setData(JwtUtil.sign(user.getUsername()));
-				userService.saveUser(bmobUser);
-			} else {
-				res.setCode(MyResponseUtil.CODE_FAIL);
-				res.setMessage(MyResponseUtil.MSG_FAIL_AUTH);
-			}
-			return res;
+			SecurityUtils.getSubject().login(token);
 		} catch (Exception e) {
-			res.setCode(MyResponseUtil.CODE_FAIL);
-			res.setMessage(e.getMessage());
-			return res;
+			e.printStackTrace();
+			return "redirect:401";
 		}
+		model.addAttribute("user", user);
+		return "redirect:menu";
 	}
 	
-	@RequiresAuthentication
-	@RequestMapping("/user/save")
-	public void signUp(User user) {
-		userService.saveUser(user);
+	@RequestMapping("/logout")
+	public String logout() {
+		return "index";
 	}
 	
-	@RequiresAuthentication
-	@RequestMapping("/user/all")
-	public List<User> findUsers() {
-		return userService.findAllUsers();
+	@RequestMapping("/401")
+	public String response401() {
+		return "401";
 	}
+	
 
 }

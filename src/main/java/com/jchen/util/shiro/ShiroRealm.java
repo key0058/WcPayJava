@@ -4,12 +4,14 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.jchen.bean.User;
 import com.jchen.service.UserService;
 import com.jchen.util.jwt.JwtShiroToken;
 import com.jchen.util.jwt.JwtUtil;
@@ -21,7 +23,11 @@ public class ShiroRealm extends AuthorizingRealm {
 	
 	@Override
 	public boolean supports(AuthenticationToken token) {
-		return token instanceof JwtShiroToken;
+		if (token instanceof JwtShiroToken)
+			return true;
+		if (token instanceof UsernamePasswordToken) 
+			return true;
+		return false;
 	}
 
 	/**
@@ -38,16 +44,27 @@ public class ShiroRealm extends AuthorizingRealm {
 	}
 
 	/**
-     * 默认使用此方法进行用户名正确与否验证，错误抛出异常即可。
+     * 	默认使用此方法进行用户名正确与否验证，错误抛出异常即可。
+     *	检查方法有Jwt和普通User登入
      */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-		String jwtToken = (String) token.getCredentials();
-		System.out.println("+++++Check token:" + jwtToken);
-		if (!JwtUtil.verify(jwtToken)) {
-			throw new AuthenticationException("++++ Jwt Token fail!");
+		if (token instanceof JwtShiroToken) {
+			String jwtToken = (String) token.getCredentials();
+			System.out.println("+++++Check token:" + jwtToken);
+			if (!JwtUtil.verify(jwtToken)) {
+				throw new AuthenticationException("++++ Shiro Jwt Token fail!");
+			}
+			return new SimpleAuthenticationInfo(jwtToken, jwtToken, getName());
+		} else {
+			UsernamePasswordToken userToken = (UsernamePasswordToken) token;
+			String username = userToken.getUsername();
+			String password = String.valueOf(userToken.getPassword());
+			System.out.println("+++++Shiro login:" + username + "=" + password);
+			if (!userService.loginUser(new User(username, password)))
+				throw new AuthenticationException("++++ Shiro User login fail!");
+			return new SimpleAuthenticationInfo(username, password, getName());
 		}
-		return new SimpleAuthenticationInfo(jwtToken, jwtToken, "MY_REALM");
 	}
 
 }

@@ -55,14 +55,13 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
 				return false;
 			}
 		}
-		
-		List<String> anonUrls = new ArrayList<String>();
-		anonUrls.add("/user/login");
-		anonUrls.add("/401");
-		
-		HttpServletRequest req = (HttpServletRequest) request;
-		if (anonUrls.contains(req.getRequestURI()))
-			return true;
+//		List<String> anonUrls = new ArrayList<String>();
+//		anonUrls.add("/user/login");
+//		anonUrls.add("/401");
+//		
+//		HttpServletRequest req = (HttpServletRequest) request;
+//		if (anonUrls.contains(req.getRequestURI()))
+//			return true;
 		return false;
 	}
 	

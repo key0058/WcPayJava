@@ -1,6 +1,7 @@
 package com.jchen.controller;
 
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,13 @@ public class JwtController {
 	@RequestMapping("/hello")
 	public String hello() {
 		return "index";
+	}
+	
+	@RequiresAuthentication
+	@RequiresRoles("admin")
+	@RequestMapping("/jwt/hello")
+	public String jwtHello() {
+		return "JWT index";
 	}
 	
 	@PostMapping("/jwt/login")

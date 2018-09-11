@@ -31,7 +31,8 @@ public class UserBmobDaoImpl implements UserBmobDao {
 		String bql = "Select * FROM Account WHERE username = ?";
 		String result = Bmob.findBQL(bql, username, true);
 		
-		System.out.println("++++ BMOB RESULT: " + result);
+		System.out.println("++++ BQL:" + bql);
+		System.out.println("++++ BMOB FIND USER RESULT: " + result);
 		
 		BSONObject object = new BSONObject(result);
 		Object[] objArray = (Object[]) object.get("results");
@@ -50,7 +51,8 @@ public class UserBmobDaoImpl implements UserBmobDao {
 		String bql = "SELECT * FROM Role";
 		String result = Bmob.findBQL(bql);
 		
-		System.out.println("++++ BMOB RESULT: " + result);
+		System.out.println("++++ BQL:" + bql);
+		System.out.println("++++ BMOB FIND ROLES RESULT: " + result);
 		
 		BSONObject object = new BSONObject(result);
 		Object[] objArray = (Object[])object.get("results");
@@ -70,7 +72,8 @@ public class UserBmobDaoImpl implements UserBmobDao {
 		String bql = "SELECT * FROM Permission";
 		String result = Bmob.findBQL(bql);
 		
-		System.out.println("++++ BMOB RESULT: " + result);
+		System.out.println("++++ BQL:" + bql);
+		System.out.println("++++ BMOB FIND PERMISSIONS RESULT: " + result);
 		
 		BSONObject object = new BSONObject(result);
 		Object[] objArray = (Object[])object.get("results");
@@ -87,10 +90,11 @@ public class UserBmobDaoImpl implements UserBmobDao {
 	public List<String> findUserRoles(String userId) {
 		List<String> list = null;
 		Bmob.initBmob(BMOB_APP_ID, BMOB_REST_API_KEY);
-		String bql = "SELECT * FROM AccountRole WHERE userId = ?";
+		String bql = "SELECT * FROM AccountRole WHERE accountId = ?";
 		String result = Bmob.findBQL(bql, userId, true);
 		
-		System.out.println("++++ BMOB RESULT: " + result);
+		System.out.println("++++ BQL:" + bql);
+		System.out.println("++++ BMOB FIND ACCOUNT ROLES RESULT: " + result);
 		
 		BSONObject object = new BSONObject(result);
 		Object[] objArray = (Object[])object.get("results");
@@ -111,7 +115,8 @@ public class UserBmobDaoImpl implements UserBmobDao {
 		String bql = "SELECT * FROM RolePermission";
 		String result = Bmob.findBQL(bql);
 		
-		System.out.println("++++ BMOB RESULT: " + result);
+		System.out.println("++++ BQL:" + bql);
+		System.out.println("++++ BMOB FIND ROLE PERMISSIONS RESULT: " + result);
 		
 		BSONObject object = new BSONObject(result);
 		Object[] objArray = (Object[])object.get("results");

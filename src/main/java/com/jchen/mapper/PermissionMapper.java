@@ -1,5 +1,7 @@
 package com.jchen.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -25,14 +27,11 @@ public interface PermissionMapper {
 	@Insert("INSERT INTO role_permission(roleId, permissionId) VALUES (#{roleId}, #{permissionId})")
 	public int insertRolePermission(String roleId, String permissionId);
 	
-//	@Select("SELECT * FROM permission WHERE permissionId = #{permissionId}")
-//	public Permission selectPermission(String permissionId);
+	@Select("SELECT p.* FROM permission p, role_permission rp WHERE rp.permissionId = p.permissionId AND rp.roleId = #{roleId}")
+	public List<Permission> selectRolePermissions(String roleId);
 	
 	@Delete("DELETE FROM permission;")
 	public void deleteAllPermissions();
-	
-//	@Delete("DELETE FROM role_permission WHERE roleId = #{roleId}")
-//	public void deleteRolePermissions(String roleId);
 	
 	@Delete("DELETE FROM role_permission;")
 	public void deleteAllRolePermissions();

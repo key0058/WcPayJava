@@ -1,5 +1,8 @@
 package com.jchen.util.shiro;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -35,8 +38,9 @@ public class ShiroRealm extends AuthorizingRealm {
      */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		String username = JwtUtil.getUsername(principals.toString());
-		System.out.println("+++++Check role and permission: " + username);
+		System.out.println("+++++Check role and permission: " + principals.toString());
+		String username = principals.toString();
+		User user = userService.findUser(username);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		info.addRole("admin");
 		info.addStringPermission("read");
@@ -55,7 +59,7 @@ public class ShiroRealm extends AuthorizingRealm {
 			if (!JwtUtil.verify(jwtToken)) {
 				throw new AuthenticationException("++++ Shiro Jwt Token fail!");
 			}
-			return new SimpleAuthenticationInfo(jwtToken, jwtToken, getName());
+			return new SimpleAuthenticationInfo(JwtUtil.getUsername(jwtToken), jwtToken, getName());
 		} else {
 			UsernamePasswordToken userToken = (UsernamePasswordToken) token;
 			String username = userToken.getUsername();

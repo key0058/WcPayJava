@@ -10,7 +10,6 @@ public class User {
 	private String password;
 
 	private List<Role> roles;
-	private List<Permission> permissions;
 	
 	public User() {
 		super();
@@ -51,11 +50,4 @@ public class User {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
-	public List<Permission> getPermissions() {
-		return permissions;
-	}
-	public void setPermissions(List<Permission> permissions) {
-		this.permissions = permissions;
-	}
-	
 }

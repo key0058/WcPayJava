@@ -35,7 +35,7 @@ public class DbServiceImpl implements DbService {
 //		permissionMapper.createPermission();
 //		permissionMapper.createRolePermission();
 		
-		userMapper.deleteAllUsers();
+//		userMapper.deleteAllUsers();
 		roleMapper.deleteAllRoles();
 		roleMapper.deleteAllUserRoles();
 		permissionMapper.deleteAllPermissions();

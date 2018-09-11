@@ -60,9 +60,8 @@ public class ShiroConfig {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("/login", "anon");
 		map.put("/logout", "logout"); 	
-//		map.put("/user/login", "anon");
-//		map.put("/user/**", "jwt");
 		map.put("/401", "anon");
+		map.put("/jwt/login", "anon");	
 		map.put("/jwt/**", "jwt");	
 		map.put("/**", "authc");
 		

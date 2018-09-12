@@ -14,6 +14,8 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.jchen.bean.Permission;
+import com.jchen.bean.Role;
 import com.jchen.bean.User;
 import com.jchen.service.UserService;
 import com.jchen.util.jwt.JwtShiroToken;
@@ -34,16 +36,25 @@ public class ShiroRealm extends AuthorizingRealm {
 	}
 
 	/**
-     * 只有当需要检测用户权限的时候才会调用此方法，例如checkRole,checkPermission之类的
+     * 	只有当需要检测用户权限的时候才会调用此方法，例如checkRole,checkPermission之类的
      */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		System.out.println("+++++Check role and permission: " + principals.toString());
 		String username = principals.toString();
 		User user = userService.findUser(username);
+		Set<String> roles = new HashSet<String>();
+		Set<String> pers = new HashSet<String>();
+		for (Role role : user.getRoles()) {
+			roles.add(role.getName());
+			for (Permission per : role.getPermissions()) {
+				pers.add(per.getOperation());
+			}
+		}
+		
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		info.addRole("admin");
-		info.addStringPermission("read");
+		info.addRoles(roles);
+		info.addStringPermissions(pers);
 		return info;
 	}
 

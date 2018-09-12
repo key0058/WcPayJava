@@ -25,8 +25,8 @@ public interface UserMapper {
 	
 	@Select("SELECT * FROM user WHERE username = #{username}")
 	@Results({
-		@Result(property = "roles", column = "userId", many = @Many(select = "com.jchen.mapper.RoleMapper.selectUserRoles")),
-		@Result(property = "userId", column = "userId")
+		@Result(property = "userId", column = "userId"),
+		@Result(property = "roles", column = "userId", many = @Many(select = "com.jchen.mapper.RoleMapper.selectUserRoles"))
 	})
 	public User selectUser(String username);
 

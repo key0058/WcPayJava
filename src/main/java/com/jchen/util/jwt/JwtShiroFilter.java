@@ -1,8 +1,5 @@
 package com.jchen.util.jwt;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -55,13 +52,6 @@ public class JwtShiroFilter extends BasicHttpAuthenticationFilter {
 				return false;
 			}
 		}
-//		List<String> anonUrls = new ArrayList<String>();
-//		anonUrls.add("/user/login");
-//		anonUrls.add("/401");
-//		
-//		HttpServletRequest req = (HttpServletRequest) request;
-//		if (anonUrls.contains(req.getRequestURI()))
-//			return true;
 		return false;
 	}
 	

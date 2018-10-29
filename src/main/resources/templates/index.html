@@ -1,13 +1,135 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+﻿<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Title</title>
+<meta charset="UTF-8">
+<title>个人简介</title>
+
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/timeline.css">
+<link rel="stylesheet" type="text/css" href="css/animate.min.css">
+
 </head>
 <body>
-    <form action="/login" method="POST">
-    	Username <input type="text" name="username" /><br>
-    	Password <input type="text" name="password" /><br>
-    	<input type="submit" value="Login" />
-    </form>
+<div class="container-fluid">
+	<div class="col-md-12">
+		<div class="row">
+			<h2>JChen 个人简介</h2>
+			<div class="timeline timeline-line-dotted">
+				<span class="timeline-label">
+					<span class="label label-primary">大学期间</span>
+				</span>
+				<div class="timeline-item">
+					<div class="timeline-point timeline-point-success">
+						<i class="fa fa-bicycle"></i>
+					</div>
+					<div class="timeline-event animated rotateIn faster">
+						<div class="timeline-heading">
+							<h4>毕业于广东工业大学华立学院</h4>
+						</div>
+						<div class="timeline-body">
+							<p>计算机科学与技术专业，之后参加了达内的JAVA软件工程师培训。</p>
+						</div>
+						<div class="timeline-footer">
+							<p class="text-right">2008.9~2012.7</p>
+						</div>
+					</div>
+				</div>
+				<span class="timeline-label">
+					<span class="label label-primary">深圳实习</span>
+				</span>
+				<div class="timeline-item">
+					<div class="timeline-point timeline-point-success">
+						<i class="fa fa-bus"></i>
+					</div>
+					<div class="timeline-event animated rotateIn faster">
+						<div class="timeline-heading">
+							<h4>深圳软通动力有限公司</h4>
+						</div>
+						<div class="timeline-body">
+							<p>毕业前曾在深圳南山实习，也是JAVA方向的工作，做过地板销售管理项目，以及一些仿购物网站的项目功能实现。</p>
+						</div>
+						<div class="timeline-footer">
+							<p class="text-right">2011.12~2012.04</p>
+						</div>
+					</div>
+				</div>
+				<span class="timeline-label">
+					<span class="label label-primary">广州时光</span>
+				</span>
+				<div class="timeline-item">
+					<div class="timeline-point timeline-point-success">
+						<i class="fa fa-subway"></i>
+					</div>
+					<div class="timeline-event animated rotateIn faster">
+						<div class="timeline-heading">
+							<h4>广州城电客户优先公司</h4>
+						</div>
+						<div class="timeline-body">
+							<p>我在公司基本负责JAVA网站方向的开发，同时也需要参与Linux服务器维护，以及Oracle数据库统计及分析等相关的工作，也有IOS开发的经验。</p>
+						</div>
+						<div class="timeline-footer">
+							<p class="text-right">2012.07~2014.10</p>
+						</div>
+					</div>
+				</div>
+				<span class="timeline-label">
+					<span class="label label-primary">东莞我家</span>
+				</span>
+				<div class="timeline-item">
+					<div class="timeline-point timeline-point-success">
+						<i class="fa fa-car"></i>
+					</div>
+					<div class="timeline-event animated rotateIn faster">
+						<div class="timeline-heading">
+							<h4>东莞市常平莱恩学校</h4>
+						</div>
+						<div class="timeline-body">
+							<p>回到东莞，曾担任过一些小型企业的系统管理员，搭建及维护网络系统，日常电脑维修。也因机缘巧合，我有幸能在这所学校里担任程序设计师，除了日常电脑维修，还会帮学校拍摄，及设计一些海报，另外就是开发及运营学校的公众号，重新制作学校主页等工作。</p>
+						</div>
+						<div class="timeline-footer">
+							<p class="text-right">2015.12~2018.07</p>
+						</div>
+					</div>
+				</div>
+				
+				<span class="timeline-label">
+					<a href="#" class="btn btn-default" title="More...">
+						<i class="fa fa-fw fa-history"></i>
+					</a>
+				</span>
+			</div>
+		</div>
+		<div class="row">
+			<h2>自我评价</h2>
+			<div class="timeline">
+
+				<div class="timeline-item">
+					<div class="timeline-point timeline-point-info">
+						<i class="fa fa-star"></i>
+					</div>
+					<div class="timeline-event timeline-event-info animated rotateIn faster">
+						<div class="timeline-heading">
+							<h4>表面评价</h4>
+						</div>
+						<div class="timeline-body">
+							<p>当了程序员，才明白其实学习一门语言根本不够，而且不是说有了什么技术就可以高枕无忧。如果为了生活，是坚持一份工作的原因，那么我认为学习下去，才是能坚持做这份工作继续的理由。回来我的家，除了生活的因由，也有感情的初衷，我至少并没有停下过学习技术的脚步。我的逻辑思路还有经验，希望可以为贵公司所用，一展所长。</p>
+						</div>
+						<div class="timeline-footer">
+							<p class="text-right"></p>
+						</div>
+					</div>
+				</div>
+
+				<span class="timeline-label">
+					<button class="btn btn-danger"><i class="fa fa-history"></i></button>
+				</span>
+			</div>
+		</div>
+		<br/>
+	</div>
+</div>
+</div>
 </body>
 </html>
+

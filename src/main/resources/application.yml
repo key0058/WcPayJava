@@ -4,6 +4,8 @@ spring:
   datasource:
     url:  jdbc:sqlite:account.db
     driver-class-name: org.sqlite.JDBC
+  resources:
+    static-locations: classpath:/templates/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
   thymeleaf:
     content-type: text/html
     enabled: true
@@ -11,6 +13,8 @@ spring:
     mode: HTML5
     prefix: classpath:/templates/
     suffix: .html
+  mvc:
+    static-path-pattern: /**
     
 bmob:
   app-id: 37b79d1b03807693a777002779739d61

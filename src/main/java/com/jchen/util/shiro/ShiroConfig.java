@@ -1,6 +1,7 @@
 package com.jchen.util.shiro;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.servlet.Filter;
@@ -53,11 +54,13 @@ public class ShiroConfig {
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 		
 		// 添加自己的过滤器并且取名为jwt
-		Map<String, Filter> filterMap = new HashMap<String, Filter>();
+		Map<String, Filter> filterMap = new LinkedHashMap<String, Filter>();
 		filterMap.put("jwt", new JwtShiroFilter());
 //		filterMap.put("user", new UserShiroFilter());
 		
 		Map<String, String> map = new HashMap<String, String>();
+		map.put("/css/*", "anon");
+		map.put("/fonts/*", "anon");
 		map.put("/login", "anon");
 		map.put("/logout", "logout"); 	
 		map.put("/401", "anon");
